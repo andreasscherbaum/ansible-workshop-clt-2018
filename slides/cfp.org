@@ -1,0 +1,19 @@
+* Server mit Ansible verwalten
+
+Du wolltest deine Server schon immer mal zentral verwalten und hattest bisher
+keine Gelegenheit, dich in Ansible, Chef, Puppet oder ähnliches einzuarbeiten?
+Dann bietet dir unser Workshop eine gute Gelegenheit, Ansible auszuprobieren.
+
+Wir erklären dir, wie Ansible funktioniert. Danach probieren wir erste Schritte
+im Adhoc-Modus. Einen großen Teil wird die Arbeit mit Playbooks einnehmen und
+schließlich erklären wir dir noch einige der Best Practices in der Arbeit mit
+dem Werkzeug.
+
+Webseite: Github?
+
+Vorkenntnisse: Grundlagen in der Administration eines Linux-Systems, Umgang mit
+einem Texteditor
+
+Weitere Informationen: 
+
+Material zum Beitrag:
