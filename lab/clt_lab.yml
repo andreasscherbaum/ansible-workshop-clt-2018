@@ -28,7 +28,7 @@
   - name: template ansible.cfg
     template:
       src: ansible.cfg.j2
-      dest: "./{{ attendee_prefix }}{{ item }}/.ansible.cfg"
+      dest: "./{{ attendee_prefix }}{{ item }}/ansible.cfg"
     with_sequence: start=0 end="{{ attendees|length - 1 }}" format="%02d"
 
   - name: create ec2 key pairs
@@ -97,16 +97,13 @@
       body: |
          Hallo,
 
-         im Anhang findest Du die für den CLT 2018 Ansible Workshop notwendigen Dateien. Speichere alle bitte in deinem $HOME.
+         im Anhang findest Du die für den CLT 2018 Ansible Workshop notwendigen Dateien. Speichere alle bitte im Stammverzeichnis des ausgecheckten git-Repos.
 
-         Anschließend führst du bitte noch ein 'chmod 0600 ~/key.pem' aus.
+         Anschließend führst du bitte noch ein 'chmod 0600 key.pem' aus.
 
          Dann müsste alles startklar sein und ein 'ansible -m ping all' sollte fröhliche 'pong' zurückgeben.
 
          Viel Spaß beim Workshop wünschen Dir Andreas, Andreas & Jens!
-      attach: "./{{ item.tagged_instances[0].tags.Name }}/inventory ./{{ item.tagged_instances[0].tags.Name }}/key.pem ./{{ item.tagged_instances[0].tags.Name }}/.ansible.cfg"
+      attach: "./{{ item.tagged_instances[0].tags.Name }}/inventory ./{{ item.tagged_instances[0].tags.Name }}/key.pem ./{{ item.tagged_instances[0].tags.Name }}/ansible.cfg"
     when: item.changed
     with_items: "{{ ec2_instances.results }}"
-
-# Tags: Name > Owner, Owner > Contact, stattdessen: Name: attendee_00_host1
-# README ergänzen: config ablegen, inventory ablegen, ... alles bis zum Erfolgserlebnis in README der Uebung 01
