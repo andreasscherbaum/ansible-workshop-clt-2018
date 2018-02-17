@@ -1,0 +1,16 @@
+---
+
+- name: Install NTP and set timezone
+  hosts: all
+  become: true
+  tasks:
+
+    - name: install NTP package
+      package:
+        name: ntp
+        state: latest
+
+    - name: ensure ntp is running
+      service:
+        name: ntp
+        state: started
