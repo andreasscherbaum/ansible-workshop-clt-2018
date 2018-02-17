@@ -5,12 +5,12 @@
   become: true
   tasks:
 
-    - name: install NTP package
+    - name: Install NTP package
       package:
         name: ntp
         state: latest
 
-    - name: ensure ntp is running
+    - name: Ensure ntp is running
       service:
         name: ntp
         state: started
