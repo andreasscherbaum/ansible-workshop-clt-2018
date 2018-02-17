@@ -65,7 +65,7 @@
       aws_secret_key: "{{ aws_secret_key }}"
       region: "{{ region }}"
       image: "{{ ami }}"
-      instance_type: t2.micro
+      instance_type: t2.nano
       assign_public_ip: yes
       exact_count: 2
       count_tag:
@@ -93,16 +93,20 @@
       from: clt_ansible@domov.de
       to: "{{ item.tagged_instances[0].tags.Owner }}"
       charset: utf8
-      subject: "CLT 2018 Ansible Workshop - Files"
+      subject: "CLT 2018 Ansible Workshop"
       body: |
          Hallo,
-
-         im Anhang findest Du die für den CLT 2018 Ansible Workshop notwendigen Dateien. Speichere alle bitte im Stammverzeichnis des ausgecheckten git-Repos.
-
-         Anschließend führst du bitte noch ein 'chmod 0600 key.pem' aus.
-
+         
+         für den reibungslosen Start in den Workshop führe bitte folgende Schritte aus:
+         
+           - git clone https://github.com/andreasscherbaum/ansible-workshop-clt-2018
+           - cd ansible-workshop-clt-2018
+           - speichere die drei Dateien im Anhang in den Ordner ansible-workshop-clt-2018
+           - chmod 0600 key.pem
+           - export ANSIBLE_CONFIG=$(pwd)
+         
          Dann müsste alles startklar sein und ein 'ansible -m ping all' sollte fröhliche 'pong' zurückgeben.
-
+         
          Viel Spaß beim Workshop wünschen Dir Andreas, Andreas & Jens!
       attach: "./{{ item.tagged_instances[0].tags.Name }}/inventory ./{{ item.tagged_instances[0].tags.Name }}/key.pem ./{{ item.tagged_instances[0].tags.Name }}/ansible.cfg"
     when: item.changed
