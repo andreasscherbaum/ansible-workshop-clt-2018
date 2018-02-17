@@ -1,0 +1,15 @@
+---
+
+- name: Install PostgreSQL packages
+  package:
+    name: "{{ item }}"
+    state: latest
+  with_item:
+    - postgresql
+    - postgresql-client
+    - postgresql-contrib
+
+- name: Ensure PostgreSQL is running
+  service:
+    name: postgresql
+    state: started
