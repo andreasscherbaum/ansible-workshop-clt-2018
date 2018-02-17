@@ -4,7 +4,7 @@ Rollen verstehen und anwenden
 
 ## Details
 
-Rollen sind wiederverwendbare Bausteine, die auf die gesamte Landschaft odr Teile davon angewendet werden können. Sie beschreiben einen funktional abgegrenzten Sollzustand und können von Playbooks verwendet ("aufgerufen") werden.
+Rollen sind wiederverwendbare Bausteine, die auf die gesamte Landschaft oder Teile davon angewendet werden können. Sie beschreiben einen funktional abgegrenzten Sollzustand und können von Playbooks verwendet ("aufgerufen") werden.
 
 Im Folgenden wollen wir
 
