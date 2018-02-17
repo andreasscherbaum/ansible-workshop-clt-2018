@@ -5,13 +5,17 @@ Erreichbarkeit der Maschine überprüfen
 ## Durchführung
 
 ```
-ansible all -m ping --inventory-file=hosts.cfg
+ansible all -m ping
 ```
 
 ## gewünschtes Ergebnis
 
 ```
-hostname.domain.tld | SUCCESS => {
+host2 | SUCCESS => {
+    "changed": false, 
+    "ping": "pong"
+}
+host1 | SUCCESS => {
     "changed": false, 
     "ping": "pong"
 }
