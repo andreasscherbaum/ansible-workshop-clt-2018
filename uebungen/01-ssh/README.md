@@ -5,7 +5,7 @@
 ## Durchführung
 
 ```
-ssh <hostname>
+ssh -o UserKnownHostsFile=/dev/null -i key.pem ubuntu@<hostname>
 ```
 
 ## gewünschtes Ergebnis
