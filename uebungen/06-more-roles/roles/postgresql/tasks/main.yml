@@ -4,7 +4,7 @@
   package:
     name: "{{ item }}"
     state: latest
-  with_item:
+  with_items:
     - postgresql
     - postgresql-client
     - postgresql-contrib
