@@ -4,7 +4,7 @@
   package:
     name: "{{ item }}"
     state: latest
-  with_item:
+  with_items:
     - apache2
     - apache2-utils
     - libapache2-mod-php
