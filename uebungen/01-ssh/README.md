@@ -5,8 +5,11 @@
 ## Durchführung
 
 ```
-ssh -o UserKnownHostsFile=/dev/null -i key.pem ubuntu@<hostname>
+ssh -o UserKnownHostsFile=/dev/null -i key.pem ubuntu@<IP Adresse>
 ```
+
+Die IP-Adresse(n) der Maschine(n) sind in der Datei _inventory_ zu finden.
+
 
 ## gewünschtes Ergebnis
 
