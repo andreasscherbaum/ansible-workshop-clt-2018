@@ -8,6 +8,7 @@
     - postgresql
     - postgresql-client
     - postgresql-contrib
+    - python-psycopg2
 
 - name: Ensure PostgreSQL is running
   service:
