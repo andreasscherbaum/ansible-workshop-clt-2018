@@ -1,6 +1,6 @@
 ---
 
-- name: Install NTP and set timezone
+- name: Install NTP
   hosts: all
   become: true
   tasks:

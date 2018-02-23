@@ -24,7 +24,7 @@ ansible-playbook install-ntp.yml
 * erstes Mal
 ```
 
-PLAY [Install NTP and set timezone] ********************************************
+PLAY [Install NTP] *************************************************************
 
 TASK [setup] *******************************************************************
 ok: [host1]
@@ -48,7 +48,7 @@ host2                      : ok=3    changed=1    unreachable=0    failed=0
 * zweites Mal
 ```
 
-PLAY [Install NTP and set timezone] ********************************************
+PLAY [Install NTP] *************************************************************
 
 TASK [setup] *******************************************************************
 ok: [host1]
