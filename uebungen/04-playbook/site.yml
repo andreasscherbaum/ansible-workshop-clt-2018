@@ -1,5 +1,15 @@
 ---
 
+- name: Set hostnames
+  hosts: all
+  become: true
+  tasks:
+
+    - name: Set hostname
+      hostname:
+        name: "{{ inventory_hostname }}"
+
+
 - name: Install NTP
   hosts: all
   become: true
