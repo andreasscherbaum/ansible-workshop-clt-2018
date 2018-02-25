@@ -178,7 +178,7 @@ verwaltet über Ansible
   \begin{description}
   \item[\texttt{-i}] bezeichnet den Ort des Inventorys
   \item[\texttt{-m}]  Modul, welches ausgeführt werden soll
-  \item[\texttt{-a}] Argumente zum obigen Modul bzw. Shell"=Kommando
+  \item[\texttt{-a}] Argumente zum obigen Modul bzw. Shell"=Kommando (\texttt{command}"=Modul)
   \item[\texttt{-u}] Benutzername (Standard: aktueller Benutzername)
   \end{description}
   \pause{}
@@ -198,5 +198,40 @@ verwaltet über Ansible
   \end{exampleblock}
 \end{frame}
 
+\subsection{Ad-Hoc-Befehle}
+
+\begin{frame}
+  \frametitle{Module}
+  Module abstrahieren Konfigurations- bzw. Sysadmin"=Aufgaben. Diese machen die
+  eigentliche Arbeit. Eine Liste aller verfügbaren Module ist auf
+  \url{http://docs.ansible.com/ansible/latest/modules_by_category.html}.
+\end{frame}
+
+\begin{frame}
+  \frametitle{Module}
+  \framesubtitle{Idempotenz}
+  Ein wichtiges Konzept von Ansible, wie auch ähnlichen Managementprogrammen,
+  ist die \emph{Idempotenz}. Das heißt, ein mehrfacher Aufruf hat denselben
+  Effekt wie einmalige Ausführung.
+
+  Module sollten die Idempotenz garantieren, d.\,h. wenn diese feststellen, dass
+  der gewünschte Stand erreicht ist, nehmen diese keine Änderung am System vor.
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{Module}
+  \framesubtitle{Dokumentation}
+  Die Dokumentation der Module kann über die Kommandozeile mittels
+  \texttt{ansible-doc modulname} oder über die Webseite abgerufen werden.
+
+  \begin{exampleblock}{Shellmodul}
+    \texttt{ansible-doc shell} oder \url{http://docs.ansible.com/ansible/latest/shell_module.html}
+  \end{exampleblock}
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{Übung 3}
+  Führt weitere Ad-Hoc-Befehle aus, siehe \texttt{uebungen/03-addoc}.
+\end{frame}
 
 \end{document}
