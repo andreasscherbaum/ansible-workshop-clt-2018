@@ -1,0 +1,245 @@
+\documentclass[ngerman]{beamer}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[ngerman]{babel}
+\usepackage{microtype}
+\usepackage{csquotes}
+\usepackage[type1,ttscale=.875]{libertine}
+\usepackage{inconsolata}
+\usepackage{fixltx2e}
+
+\usetheme{JuanLesPins}
+\usecolortheme{beaver}
+\usefonttheme{professionalfonts}
+
+\begin{document}
+\title{Server mit Ansible verwalten}
+\author{Andreas Krause, Jens Kubieziel, Andreas Scherbaum}
+\date{11.\,März~2018}
+
+\begin{frame}
+  \maketitle{}
+\end{frame}
+
+\section{Einleitung}
+
+\begin{frame}
+  \frametitle{Organisatorisches}
+\begin{itemize}
+\item Geplante Dauer: 3~Stunden
+\item Nach einer kurzen Einführung gibt es  Übungen.
+\item Wir stellen euch AWS-Instanzen zur Verfügung.
+\end{itemize}
+\pause{}
+
+Ziel: Betrieb einer kleinen PHP"=Anwendung mit  Web- und Datenbankserver
+verwaltet über Ansible
+\end{frame}
+
+\begin{frame}
+  \frametitle{Wir}
+  \framesubtitle{Kurze Vorstellung}
+  \begin{itemize}
+  \item Andreas Krause
+  \item Jens Kubieziel
+  \item Andreas Scherbaum
+  \end{itemize}
+\end{frame}
+
+\section{Einführung in Ansible}
+
+\begin{frame}
+  \frametitle{Was ist Ansible?}
+  \begin{enumerate}
+  \item<+-> Ein Kommunikationsgerät, mit dem ihr mit Überlichtgeschwindigkeit
+    kommunizieren könnt (\textsc{Ursula K.\,Le Guin})
+  \item<+-> Eine Software, die bei der Verwaltung und der Konfiguration von
+    Servern hilft.
+  \end{enumerate}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Warum Ansible?}
+  \begin{columns}
+    \begin{column}{.5\textwidth}
+      \includegraphics[width=\textwidth]{clt17-ansible}
+    \end{column}
+    \begin{column}{.5\textwidth}  
+      \includegraphics[width=\textwidth]{clt17-ansible2}
+    \end{column}
+  \end{columns}
+\end{frame}
+
+
+
+\begin{frame}
+  \frametitle{Was ist Ansible?}
+  \framesubtitle{Details}
+  \begin{itemize}
+  \item<+-> Werkzeug zur Automatisierung von Administrationsaufgaben
+  \item<+-> Freie Software
+  \item<+-> in Python entwickelt
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Wie funktioniert Ansible?}
+  Ihr beschreibt den gewünschten Zustand der Zielsysteme. Ansible loggt sich per
+  SSH ein und führt ggf. gewünschte Aktionen aus.
+\end{frame}
+
+\begin{frame}
+  \frametitle{Wie funktioniert Ansible?}
+  \framesubtitle{Voraussetzungen}
+  \begin{itemize}
+  \item SSH
+  \item Python (Version 2.6 bzw. Python~3)
+  \end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{Wie installiere ich Ansible?}
+  \begin{itemize}
+  \item<+-> Über die Paketverwaltung deines GNU/Linux"=Systems:
+    \begin{itemize}
+    \item \texttt{apt install ansible}
+    \item Unter Ubuntu gibt es ein PPA: \texttt{apt-add-repository
+        ppa:ansible/ansible}
+    \item \texttt{yum install ansible} (ggf. das EPEL"=Repository aktivieren)
+    \item \texttt{emerge -av app-admin/ansible}
+    \end{itemize}
+  \item<+-> Aus den Quellen:
+    \begin{itemize}
+      
+    \item \texttt{pip install ansible}
+    \item \texttt{tar.gz} von \url{https://github.com/ansible/ansible/releases}
+    \end{itemize}
+  \end{itemize}
+\end{frame}
+
+\section{Erste Schritte mit Ansible}
+
+\subsection{Erreichbarkeit der Maschinen}
+
+\begin{frame}[fragile]
+  \frametitle{Übung 1}
+  Bevor wir mit Ansible loslegen, wollen wir wissen, ob ihr euch auf den
+  Maschinen einloggen könnt.
+
+  \begin{exampleblock}{}
+    Führt die Übung~1 im Verzeichnis \texttt{uebungen/01-ssh} aus.
+  \end{exampleblock}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Übung 2}
+  Mit dem ersten Ansible"=Kommando wollen wir die Maschinen anpingen. Woher weiß
+  Ansible, mit welchen Maschinen es reden soll?
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{Inventory}
+  Das Inventory sammelt die diversen Systeme und besteht aus einer oder mehreren
+  Dateien:
+  \begin{exampleblock}{hosts}
+    \texttt{192.168.23.42}\\
+    \texttt{clt.18.example.org}
+
+    \texttt{[web]}\\
+    \texttt{192.168.17.189}\\
+    \texttt{clt.18.example.org}
+  \end{exampleblock}
+\end{frame}
+
+\begin{frame}[fragile,t]
+  \frametitle{Inventory}
+  \framesubtitle{Format}
+  Das Inventory kann im INI"=Format vorliegen \only<3>{oder als YAML"=Datei:}
+  \only<2>{  \begin{exampleblock}{hosts}
+    \texttt{192.168.23.42}\\
+    \texttt{clt.18.example.org}
+
+    \texttt{[web]}\\
+    \texttt{192.168.17.189}\\
+    \texttt{clt.18.example.org}
+  \end{exampleblock}}
+% TODO: YAML-Datei einbauen
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{Ad-Hoc-Modus}
+  Mit dem Aufruf von Ansible auf der Kommandozeile lassen sich verschiedene
+  Befehle mitgeben. Diese landen eventuell in der Shellhistory, sind aber
+  ansonsten weg. Diese Art von Aufruf wird als \emph{Ad-Hoc-Modus} bezeichnet.
+  \pause{}
+  
+  Der Aufruf enthält die betreffenden Hosts sowie Optionen:
+  \begin{description}
+  \item[\texttt{-i}] bezeichnet den Ort des Inventorys
+  \item[\texttt{-m}]  Modul, welches ausgeführt werden soll
+  \item[\texttt{-a}] Argumente zum obigen Modul bzw. Shell"=Kommando (\texttt{command}"=Modul)
+  \item[\texttt{-u}] Benutzername (Standard: aktueller Benutzername)
+  \end{description}
+  \pause{}
+  
+  \begin{exampleblock}{Hello World}
+    \texttt{ansible all -i hosts -a '/bin/echo Hello World'}
+  \end{exampleblock}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Übung 2}
+  Für Ansible gibt es das Modul ping, welches einen oder mehrere Hosts
+  kontaktiert und das Ergebnis zurückmeldet.
+  
+  \begin{exampleblock}{}
+    Führt die Übung~2 im Verzeichnis \texttt{uebungen/02-ping} aus.
+  \end{exampleblock}
+\end{frame}
+
+\subsection{Ad-Hoc-Befehle}
+
+\begin{frame}
+  \frametitle{Module}
+  Module abstrahieren Konfigurations- bzw. Sysadmin"=Aufgaben. Diese machen die
+  eigentliche Arbeit. Eine Liste aller verfügbaren Module ist auf
+  \url{http://docs.ansible.com/ansible/latest/modules_by_category.html}.
+\end{frame}
+
+\begin{frame}
+  \frametitle{Module}
+  \framesubtitle{Idempotenz}
+  Ein wichtiges Konzept von Ansible, wie auch ähnlichen Managementprogrammen,
+  ist die \emph{Idempotenz}. Das heißt, ein mehrfacher Aufruf hat denselben
+  Effekt wie einmalige Ausführung.
+
+  Module sollten die Idempotenz garantieren, d.\,h. wenn diese feststellen, dass
+  der gewünschte Stand erreicht ist, nehmen diese keine Änderung am System vor.
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{Module}
+  \framesubtitle{Dokumentation}
+  Die Dokumentation der Module kann über die Kommandozeile mittels
+  \texttt{ansible-doc modulname} oder über die Webseite abgerufen werden.
+
+  \begin{exampleblock}{Shellmodul}
+    \texttt{ansible-doc shell} oder \url{http://docs.ansible.com/ansible/latest/shell_module.html}
+  \end{exampleblock}
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{Übung 3}
+  Führt weitere Ad-Hoc-Befehle aus, siehe \texttt{uebungen/03-addoc}.
+\end{frame}
+
+\section{Playbooks}
+
+\subsection{Einführung zu Playbooks}
+
+\subsection{Rollen}
+
+
+
+\end{document}
