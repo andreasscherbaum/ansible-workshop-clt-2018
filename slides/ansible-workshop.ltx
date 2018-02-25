@@ -118,4 +118,85 @@ verwaltet über Ansible
   \end{itemize}
 \end{frame}
 
+\section{Erste Schritte mit Ansible}
+
+\subsection{Erreichbarkeit der Maschinen}
+
+\begin{frame}[fragile]
+  \frametitle{Übung 1}
+  Bevor wir mit Ansible loslegen, wollen wir wissen, ob ihr euch auf den
+  Maschinen einloggen könnt.
+
+  \begin{exampleblock}{}
+    Führt die Übung~1 im Verzeichnis \texttt{uebungen/01-ssh} aus.
+  \end{exampleblock}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Übung 2}
+  Mit dem ersten Ansible"=Kommando wollen wir die Maschinen anpingen. Woher weiß
+  Ansible, mit welchen Maschinen es reden soll?
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{Inventory}
+  Das Inventory sammelt die diversen Systeme und besteht aus einer oder mehreren
+  Dateien:
+  \begin{exampleblock}{hosts}
+    \texttt{192.168.23.42}\\
+    \texttt{clt.18.example.org}
+
+    \texttt{[web]}\\
+    \texttt{192.168.17.189}\\
+    \texttt{clt.18.example.org}
+  \end{exampleblock}
+\end{frame}
+
+\begin{frame}[fragile,t]
+  \frametitle{Inventory}
+  \framesubtitle{Format}
+  Das Inventory kann im INI"=Format vorliegen \only<3>{oder als YAML"=Datei:}
+  \only<2>{  \begin{exampleblock}{hosts}
+    \texttt{192.168.23.42}\\
+    \texttt{clt.18.example.org}
+
+    \texttt{[web]}\\
+    \texttt{192.168.17.189}\\
+    \texttt{clt.18.example.org}
+  \end{exampleblock}}
+% TODO: YAML-Datei einbauen
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{Ad-Hoc-Modus}
+  Mit dem Aufruf von Ansible auf der Kommandozeile lassen sich verschiedene
+  Befehle mitgeben. Diese landen eventuell in der Shellhistory, sind aber
+  ansonsten weg. Diese Art von Aufruf wird als \emph{Ad-Hoc-Modus} bezeichnet.
+  \pause{}
+  
+  Der Aufruf enthält die betreffenden Hosts sowie Optionen:
+  \begin{description}
+  \item[\texttt{-i}] bezeichnet den Ort des Inventorys
+  \item[\texttt{-m}]  Modul, welches ausgeführt werden soll
+  \item[\texttt{-a}] Argumente zum obigen Modul bzw. Shell"=Kommando
+  \item[\texttt{-u}] Benutzername (Standard: aktueller Benutzername)
+  \end{description}
+  \pause{}
+  
+  \begin{exampleblock}{Hello World}
+    \texttt{ansible all -i hosts -a '/bin/echo Hello World'}
+  \end{exampleblock}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Übung 2}
+  Für Ansible gibt es das Modul ping, welches einen oder mehrere Hosts
+  kontaktiert und das Ergebnis zurückmeldet.
+  
+  \begin{exampleblock}{}
+    Führt die Übung~2 im Verzeichnis \texttt{uebungen/02-ping} aus.
+  \end{exampleblock}
+\end{frame}
+
+
 \end{document}
