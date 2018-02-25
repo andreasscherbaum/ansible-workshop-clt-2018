@@ -1,0 +1,23 @@
+---
+
+- name: prerequesites
+  hosts: localhost
+  gather_facts: false
+
+  vars:
+    attendee_prefix: attendee_
+
+  tasks:
+
+  - name: include attendees
+    include_vars:
+      file: attendees.yml
+
+  - name: send email
+    mail:
+      from: clt_ansible@domov.de
+      to: "{{ item }}"
+      charset: utf8
+      subject: "CLT 2018 Ansible Workshop - Vorbereitungen"
+      body: "{{lookup('file', 'prereq_mail.txt')}}"
+    with_items: "{{ attendees }}"
