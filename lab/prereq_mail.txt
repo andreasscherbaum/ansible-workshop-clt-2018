@@ -18,6 +18,6 @@ Unmittelbar vor dem Workshop senden wir dir eine zweite Email mit weiteren Hinwe
 
 Der Workshop findet am Sonntag, dem 11.03.18, um 10:00 Uhr im Raum W3 statt (siehe auch https://chemnitzer.linux-tage.de/2018/en/programm/beitrag/145).
 
-Für Rückfragen wendest Du dich bitte an clt_ansible@domov.de oder sprichst einen von uns auf dem CLT einfach an.
+Für Rückfragen wendest Du dich bitte an clt18-ansible@kubieziel.de oder sprichst einen von uns auf dem CLT einfach an.
 
 Viel Spaß beim Workshop wünschen Dir Andreas, Andreas & Jens!
