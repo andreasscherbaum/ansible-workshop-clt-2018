@@ -26,14 +26,15 @@
 
 \begin{frame}
   \frametitle{Organisatorisches}
-  \only<1>{  \begin{center}
-    \Large Willkommen zum Ansible-Workshop
-  \end{center}}
 \begin{itemize}
 \item Geplante Dauer: 3~Stunden
-\item Nach einer kurzen Einführung gibt es viele Übungen.
+\item Nach einer kurzen Einführung gibt es  Übungen.
 \item Wir stellen euch AWS-Instanzen zur Verfügung.
 \end{itemize}
+\pause{}
+
+Ziel: Betrieb einer kleinen PHP"=Anwendung mit  Web- und Datenbankserver
+verwaltet über Ansible
 \end{frame}
 
 \begin{frame}
@@ -46,5 +47,75 @@
   \end{itemize}
 \end{frame}
 
+\section{Einführung in Ansible}
+
+\begin{frame}
+  \frametitle{Was ist Ansible?}
+  \begin{enumerate}
+  \item<+-> Ein Kommunikationsgerät, mit dem ihr mit Überlichtgeschwindigkeit
+    kommunizieren könnt (\textsc{Ursula K.\,Le Guin})
+  \item<+-> Eine Software, die bei der Verwaltung und der Konfiguration von
+    Servern hilft.
+  \end{enumerate}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Warum Ansible?}
+  \begin{columns}
+    \begin{column}{.5\textwidth}
+      \includegraphics[width=\textwidth]{clt17-ansible}
+    \end{column}
+    \begin{column}{.5\textwidth}  
+      \includegraphics[width=\textwidth]{clt17-ansible2}
+    \end{column}
+  \end{columns}
+\end{frame}
+
+
+
+\begin{frame}
+  \frametitle{Was ist Ansible?}
+  \framesubtitle{Details}
+  \begin{itemize}
+  \item<+-> Werkzeug zur Automatisierung von Administrationsaufgaben
+  \item<+-> Freie Software
+  \item<+-> in Python entwickelt
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Wie funktioniert Ansible?}
+  Ihr beschreibt den gewünschten Zustand der Zielsysteme. Ansible loggt sich per
+  SSH ein und führt ggf. gewünschte Aktionen aus.
+\end{frame}
+
+\begin{frame}
+  \frametitle{Wie funktioniert Ansible?}
+  \framesubtitle{Voraussetzungen}
+  \begin{itemize}
+  \item SSH
+  \item Python (Version 2.6 bzw. Python~3)
+  \end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{Wie installiere ich Ansible?}
+  \begin{itemize}
+  \item<+-> Über die Paketverwaltung deines GNU/Linux"=Systems:
+    \begin{itemize}
+    \item \texttt{apt install ansible}
+    \item Unter Ubuntu gibt es ein PPA: \texttt{apt-add-repository
+        ppa:ansible/ansible}
+    \item \texttt{yum install ansible} (ggf. das EPEL"=Repository aktivieren)
+    \item \texttt{emerge -av app-admin/ansible}
+    \end{itemize}
+  \item<+-> Aus den Quellen:
+    \begin{itemize}
+      
+    \item \texttt{pip install ansible}
+    \item \texttt{tar.gz} von \url{https://github.com/ansible/ansible/releases}
+    \end{itemize}
+  \end{itemize}
+\end{frame}
 
 \end{document}
