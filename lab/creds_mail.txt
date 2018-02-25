@@ -5,8 +5,7 @@ mit dieser Email erhältst Du die notwendigen Zugangsdaten und Konfigurationsdat
 Wenn nicht bereits getan, checke bitte das git-Repository für den Workshop aus:
   - git clone https://github.com/andreasscherbaum/ansible-workshop-clt-2018
 
-Ansonsten wechselst Du bitte einfach nur in das ausgecheckte Repository und
-aktualisierst es noch einmal:
+Ansonsten wechselst Du bitte einfach nur in das ausgecheckte Repository und aktualisierst es noch einmal:
   - cd ansible-workshop-clt-2018
   - git pull
 
