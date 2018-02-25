@@ -94,20 +94,7 @@
       to: "{{ item.tagged_instances[0].tags.Owner }}"
       charset: utf8
       subject: "CLT 2018 Ansible Workshop"
-      body: |
-         Hallo,
-         
-         für den reibungslosen Start in den Workshop führe bitte folgende Schritte aus:
-         
-           - git clone https://github.com/andreasscherbaum/ansible-workshop-clt-2018
-           - cd ansible-workshop-clt-2018
-           - speichere die drei Dateien im Anhang in den Ordner ansible-workshop-clt-2018
-           - chmod 0600 key.pem
-           - export ANSIBLE_CONFIG=$(pwd)
-         
-         Dann müsste alles startklar sein und ein 'ansible -m ping all' sollte fröhliche 'pong' zurückgeben.
-         
-         Viel Spaß beim Workshop wünschen Dir Andreas, Andreas & Jens!
+      body: "{{lookup('file', 'creds_mail.txt')}}"
       attach: "./{{ item.tagged_instances[0].tags.Name }}/inventory ./{{ item.tagged_instances[0].tags.Name }}/key.pem ./{{ item.tagged_instances[0].tags.Name }}/ansible.cfg"
     when: item.changed
     with_items: "{{ ec2_instances.results }}"
