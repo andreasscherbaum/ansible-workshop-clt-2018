@@ -34,11 +34,23 @@ ok: [host2]
 
 PLAY [Regeln auf allen Datenbank Maschinen durchsetzen] ************************
 
-TASK [setup] *******************************************************************
+TASK [Gathering Facts] *********************************************************
+ok: [host1]
+
+TASK [postgresql : Add apt-key for PostgreSQL repository] **********************
+ok: [host1]
+
+TASK [postgresql : Read lsb_release version] ***********************************
+ok: [host1]
+
+TASK [postgresql : PostgreSQL APT repository] **********************************
 ok: [host1]
 
 TASK [postgresql : Install PostgreSQL packages] ********************************
-changed: [host1] => (item=[u'postgresql', u'postgresql-client', u'postgresql-contrib', u'python-psycopg2'])
+changed: [host1] => (item=postgresql-9.6)
+ok: [host1] => (item=postgresql-client-9.6)
+ok: [host1] => (item=postgresql-contrib-9.6)
+changed: [host1] => (item=python-psycopg2)
 
 TASK [postgresql : Ensure PostgreSQL is running] *******************************
 ok: [host1]
