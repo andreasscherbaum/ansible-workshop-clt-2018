@@ -238,6 +238,35 @@ verwaltet über Ansible
 
 \subsection{Einführung zu Playbooks}
 
+\begin{frame}
+  \frametitle{Playbooks}
+  Playbooks sind das zentrale Werkzeug von Ansible. Darüber wird 
+  Konfiguration, Deployment und Orchestration gesteuert.
+
+  Ein Playbook besteht aus einem oder mehreren kleinen Anleitungen, die angeben,
+  was auf welchen Hostrechnern zu tun ist.
+\end{frame}
+
+\begin{frame}
+  \frametitle{Playbooks}
+  \framesubtitle{Begriffe}
+  \begin{description}
+  \item[Task] ist der Aufruf eines Moduls mit diversen Parametern.
+  \item[Play] ist die Abfolge mehrerer Tasks auf Rechnern aus dem Inventory.
+  \item[Playbook] ist eine Zusammenstellung eines oder mehrerer Plays.
+  \end{description}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Playbooks}
+  \framesubtitle{Aufruf}
+  Die Playbooks werden über einen speziellen Befehl aufgerufen:
+  \begin{exampleblock}{Aufruf der Playbooks}
+    \texttt{ansible-playbook foo.yml}
+  \end{exampleblock}\pause{}
+
+  Was passiert, wenn ein Playbook mehrfach nacheinander aufgerufen wird?
+\end{frame}
 \subsection{Rollen}
 
 
