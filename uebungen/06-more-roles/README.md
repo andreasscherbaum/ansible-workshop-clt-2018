@@ -4,7 +4,7 @@ Rollen verstehen und anwenden
 
 ## Details
 
-In dieser Übung verwenden wir verschiedene Rollen um bestimmte Pakete zu installieren. Die Rollen werden jetzt nicht mehr auf allen Maschinen angewandt, sondern es wird eine Unterscheidung mittels des Inventory getroffen.
+In dieser Übung verwenden wir verschiedene Rollen um bestimmte Pakete zu installieren. Die Rollen werden jetzt nicht mehr auf allen Maschinen angewandt, sondern es wird eine Unterscheidung mittels der Gruppen im Inventory getroffen.
 
 Im Folgenden wollen wir
 
