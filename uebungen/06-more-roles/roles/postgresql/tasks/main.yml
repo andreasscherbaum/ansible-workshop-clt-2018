@@ -1,13 +1,13 @@
 ---
 
 
-- name: add apt-key for PostgreSQL repository
+- name: Add apt-key for PostgreSQL repository
   apt_key:
     url: "{{ postgresql_repository_key }}"
     state: present
 
 
-- name: lsb_release version
+- name: Read lsb_release version
   shell: lsb_release -sc
   register: lsb_release
   changed_when: false
