@@ -9,6 +9,9 @@
 \usepackage{inconsolata}
 \usepackage{fixltx2e}
 \usepackage{listings}
+\usepackage{tikz}
+\usetikzlibrary{trees}
+
 
 \usetheme{JuanLesPins}
 \usecolortheme{beaver}
@@ -340,6 +343,65 @@ verwaltet über Ansible
 
 \subsection{Rollen}
 
+\begin{frame}[fragile]
+  \frametitle{Rollen}
+  \framesubtitle{Einführung}
+  Mit den Methoden können wir nun ein großes Playbook schreiben. Aber irgendwann
+  kommt der Punkt, wo die Arbeit besser organisiert werden soll. Denn in der
+  Regel sollen viele kleine Aufgaben ausgeführt werden statt einer großen.
 
+  Seit Ansible~2.4 gibt es die Möglichkeit, Inhalte anderer Dateien einzubinden
+  (\texttt{import} und \texttt{include}).
+
+  Rollen sind ein älteres Mittel. Diese greifen auf eine vordefinierte
+  Verzeichnisstruktur zurück und können Tasks ausführen, auf Variablen zugreifen etc.
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{Rollen}
+  \framesubtitle{Verzeichnisstruktur}
+  \begin{columns}
+    \begin{column}{.6\textwidth}
+      \begin{itemize}
+      \item<+-> Mindestens eines der Verzeichnisse muss existieren
+      \item<+-> Die existierenden Verzeichnisse müssen eine Datei mit dem Namen
+        \texttt{main.yml} enthalten.
+      \end{itemize}
+    \end{column}
+    \begin{column}{.4\textwidth}
+      \tikzstyle{every node}=[draw=black,thick,anchor=west]
+      \tikzstyle{selected}=[draw=red,fill=red!30]
+      \tikzstyle{optional}=[dashed,fill=gray!50]
+      \begin{tikzpicture}[%
+        grow via three points={one child at (0.5,-0.7) and two children at
+          (0.5,-0.7) and (0.5,-1.4)}, edge from parent
+        path={(\tikzparentnode.south) |- (\tikzchildnode.west)}]
+        \node {/} child { node {roles} child { node {Rolle}
+            child { node {tasks}} child { node {handlers}} child { node {files}}
+            child { node {templates}} child { node {vars}} child { node
+              {defaults}} child { node {meta}} }} ;
+      \end{tikzpicture}
+    \end{column}
+  \end{columns}
+\end{frame}
+\begin{frame}
+  \frametitle{Rollen}
+  \framesubtitle{Inhalt der Verzeichnisse}
+  \begin{description}
+  \item[tasks] enthalten die Liste an Tasks, die durch die Rolle ausgeführt wird
+  \item[handlers]  Handler, die durch die Rolle benutzt werden
+  \item[files]  Dateien, die von dieser Rolle benutzt werden
+  \item[templates]  Templates, die dann deployt werden
+  \item[vars] Variablen für die Rolle
+  \item[defaults] Standardwerte für Variablen
+  \item[meta] Abhängigkeiten der Rolle
+  \end{description}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Übung 5}
+  In der vorigen Übung haben wir den Hostnamen gesetzt und einen NTP"=Server
+  installiert. Baut das nun um, dass diese Aufgaben als Rolle ausgeführt werden.
+\end{frame}
 
 \end{document}
