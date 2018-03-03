@@ -8,6 +8,7 @@
 \usepackage[type1,ttscale=.875]{libertine}
 \usepackage{inconsolata}
 \usepackage{fixltx2e}
+\usepackage{listings}
 
 \usetheme{JuanLesPins}
 \usecolortheme{beaver}
@@ -267,6 +268,76 @@ verwaltet über Ansible
 
   Was passiert, wenn ein Playbook mehrfach nacheinander aufgerufen wird?
 \end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{YAML}
+  Ansible nutzt die Beschreibungssprache YAML für Playbooks und anderes. Im
+  folgenden findet ihr einen kurzen Überblick über die Syntax.
+  \pause{}
+  
+  Der Start eines Dokuments kann durch drei Striche (\texttt{---}) und das Ende
+  durch drei Punkte (\texttt{...}) markiert werden.
+  \begin{exampleblock}{Das übliche Hallo-Welt-Beispiel}
+    \texttt{---}\\
+    \texttt{Hallo: Welt}\\
+    \texttt{...}
+  \end{exampleblock}
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{YAML}
+  \framesubtitle{Syntax}
+  \begin{itemize}
+  \item<1-> Listen starten mit einem Anstrich (\texttt{-}) und Leerraum.
+    \begin{exampleblock}{}
+      \texttt{- Hallo}\\
+      \texttt{- Welt}
+    \end{exampleblock}
+  \item<2-> Dictionarys bestehen aus Schlüsselwert, \texttt{:}, Leerzeichen und
+    Wert.
+    \begin{exampleblock}{}
+      \texttt{Hallo: Welt}\\
+      \texttt{Linux: Debian}
+    \end{exampleblock}
+  \end{itemize}
+  \pause{}
+  Beides lässt sich kombinieren und verschachteln.
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{YAML}
+  \framesubtitle{Beispiel}
+  Stellt euch vor, ihr wollt sicherstellen, dass auf einem neuen Host ein
+  bestimmter Nutzer angelegt ist, dieser eure Lieblingsshell als Login"=Shell
+  hat und diese natürlich installiert ist. Welche Schritte würdet ihr machen, um
+  dies zu realisieren?\pause{}
+  \begin{exampleblock}{Nutzer anlegen}
+\begin{lstlisting}
+- hosts: all
+  tasks:
+  - name: Shell installieren
+    apt: name=fish state=installed
+  - name: Nutzer anlegen
+    user: name=clt18 shell=/usr/bin/fish
+\end{lstlisting}
+  \end{exampleblock}
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{YAML}
+  \framesubtitle{Variablen}
+  Später benötigen wir Variablen:
+  \begin{exampleblock}{}
+    \texttt{name: "\{\{ Variable \}\}"}
+  \end{exampleblock}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Übung 4}
+  Entwerft nun ein Playbook, welches den Hostnamen setzt, einen NTP"=Server
+  installiert und sicherstellt, dass der Daemon auch läuft.
+\end{frame}
+
 \subsection{Rollen}
 
 
