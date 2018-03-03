@@ -8,7 +8,7 @@ Rollen sind wiederverwendbare Bausteine, die auf die gesamte Landschaft oder Tei
 
 Im Folgenden wollen wir
 
-* die Hostnamen Hilfe einer Rolle setzen
+* die Hostnamen mit Hilfe einer Rolle setzen
 * NTP mit Hilfe einer Rolle installieren und starten
 
 ## Durchführung
