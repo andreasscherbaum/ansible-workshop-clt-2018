@@ -31,6 +31,7 @@
     - "postgresql-contrib-{{ postgresql_version }}"
     - python-psycopg2
 
+
 - name: Ensure PostgreSQL is running
   service:
     name: postgresql
