@@ -404,4 +404,42 @@ verwaltet über Ansible
   installiert. Baut das nun um, dass diese Aufgaben als Rolle ausgeführt werden.
 \end{frame}
 
+\begin{frame}
+  \frametitle{Übung 6}
+  Jetzt gehen wir einen Schritt weiter und bauen uns eine
+  \enquote{Serverlandschaft} auf. Wir haben Server, die als Webserver und
+  solche, die als Datenbankserver fungieren. Bastelt jetzt Rollen, die
+  in Abhängigkeit vom Host die entsprechenden Pakete installieren.
+  \begin{columns}
+    \begin{column}{.5\textwidth}
+      \begin{exampleblock}{Webserver}
+        \begin{itemize}
+        \item apache2
+        \item apache2-utils
+        \item libapache2-mod-php
+        \item php
+        \item php-dev
+        \item php-pgsql
+        \item php-pear
+        \item php-gettext
+        \end{itemize}
+      \end{exampleblock}
+    \end{column}
+    \begin{column}{.5\textwidth}
+      \begin{exampleblock}{PostgreSQL}
+        \begin{itemize}
+        \item postgresql
+        \item postgresql-client
+        \item postgresql-contrib
+        \item python-psycopg2
+        \item postgresql-client-common
+        \item postgresql-client
+        \end{itemize}
+      \end{exampleblock}
+    \end{column}
+  \end{columns}
+\end{frame}
+
+
+
 \end{document}
