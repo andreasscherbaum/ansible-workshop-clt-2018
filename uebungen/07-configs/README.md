@@ -8,12 +8,12 @@ Diese Übung konfiguriert den Webserver (genauer gesagt das PHP) und die Datenba
 
 Im Folgenden wollen wir
 
-* Das Error Logging und weitere Einstellungen in PHP anpassen
-* Die Datenbank auf allen Netzwerk Devices aktivieren
-* Einen neuen Datenbank Nutzer erstellen
+* Das Error-Logging und weitere Einstellungen in PHP anpassen
+* Die Datenbank auf allen Netzwerkgeräten aktivieren
+* Einen neuen Datenbanknutzer erstellen
 * Eine neue Datenbank erstellen
 
-Das Passwort für den Datenbank Nutzer wird dynamisch erstellt, und in einer Datei _db-account-test.txt_ im Hauptverzeichnis gespeichert.
+Das Passwort für den Datenbanknutzer wird dynamisch erstellt, und in einer Datei _db-account-test.txt_ im Hauptverzeichnis gespeichert.
 
 
 ## Durchführung
