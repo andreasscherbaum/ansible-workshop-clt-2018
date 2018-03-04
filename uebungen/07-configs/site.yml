@@ -31,12 +31,13 @@
 - name: Regeln auf allen Datenbank Maschinen durchsetzen
   hosts: dbservers
   become: true
+  vars:
+    - postgresql_version: "9.6"
   tasks:
 
     - name: Configure postgresql.conf
       lineinfile:
-        # hardcoded version number
-        dest: /etc/postgresql/9.5/main/postgresql.conf
+        dest: "/etc/postgresql/{{ postgresql_version }}/main/postgresql.conf"
         regexp: "{{ item.regexp }}"
         line: "{{ item.line }}"
         state: "{{ item.state }}"
@@ -48,8 +49,7 @@
 
     - name: Configure pg_hba.conf
       lineinfile:
-        # hardcoded version number
-        dest: /etc/postgresql/9.5/main/pg_hba.conf
+        dest: "/etc/postgresql/{{ postgresql_version }}/main/pg_hba.conf"
         line: "{{ item.line }}"
         state: "{{ item.state }}"
       with_items:
