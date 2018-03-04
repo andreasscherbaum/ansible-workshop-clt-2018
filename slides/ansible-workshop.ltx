@@ -416,42 +416,103 @@ verwaltet über Ansible
   installiert. Baut das nun um, dass diese Aufgaben als Rolle ausgeführt werden.
 \end{frame}
 
+
+\begin{frame}
+  \frametitle{Rollen}
+  \framesubtitle{Schleifen in Playbooks}
+  Für die Übung~5 reichte es, einen Ordner für die Tasks anzulegen. Nun wollen
+  wir auch mit Variablen arbeiten und Schleifen nutzen.
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{Rollen}
+  \framesubtitle{Schleifen in Playbooks}
+  Über den Schlüssel \texttt{with\_items} können wir eine Liste von Werten
+  anlegen. Der Zugriff darauf erfolgt mittels \texttt{\{\{ item \}\}}.\pause{}
+
+  \begin{exampleblock}{Playbook mit Schleife}
+\begin{lstlisting}
+- name: Installiere Shell und git
+  package: "{{ item }}"
+  state: latest
+  with_items:
+  - fish
+  - git
+\end{lstlisting}
+  \end{exampleblock}
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{Rollen}
+  \framesubtitle{Werte in Variablen speichern}
+  Ansible erlaubt es, ausgegebene Werte in Variablen zu speichern und später
+  wieder darauf zurückzugreifen. Der Schlüssel \texttt{register} legt den Namen
+  der Variablen fest.
+  \begin{exampleblock}{Variable setzen}
+\begin{lstlisting}
+tasks:
+  - shell: /usr/bin/git branch
+    register: branch_name
+\end{lstlisting}
+  \end{exampleblock}
+
+    \begin{exampleblock}{auf Variable zugreifen}
+\begin{lstlisting}
+    foo: {{ branch_name.stdout }}
+\end{lstlisting}
+  \end{exampleblock}
+\end{frame}
+
+
 \begin{frame}
   \frametitle{Übung 6}
   Jetzt gehen wir einen Schritt weiter und bauen uns eine
   \enquote{Serverlandschaft} auf. Wir haben Server, die als Webserver und
-  solche, die als Datenbankserver fungieren. Bastelt jetzt Rollen, die
-  in Abhängigkeit vom Host die entsprechenden Pakete installieren.
-  \begin{columns}
-    \begin{column}{.5\textwidth}
-      \begin{exampleblock}{Webserver}
+  solche, die als Datenbankserver fungieren.
+
+  Für den Webserver benötigen wir die folgenden Pakete und möchten
+  sicherstellen, der Apache nach erfolgreicher Installation auch gestartet ist:
+
+  \begin{exampleblock}{Webserver}
+    \begin{columns}
+      \begin{column}{.5\textwidth}
         \begin{itemize}
         \item apache2
         \item apache2-utils
         \item libapache2-mod-php
+        \end{itemize}
+      \end{column}
+      \begin{column}{.5\textwidth}
+        \begin{itemize}
         \item php
         \item php-dev
         \item php-pgsql
         \item php-pear
         \item php-gettext
         \end{itemize}
-      \end{exampleblock}
-    \end{column}
-    \begin{column}{.5\textwidth}
-      \begin{exampleblock}{PostgreSQL}
-        \begin{itemize}
-        \item postgresql
-        \item postgresql-client
-        \item postgresql-contrib
-        \item python-psycopg2
-        \item postgresql-client-common
-        \item postgresql-client
-        \end{itemize}
-      \end{exampleblock}
-    \end{column}
-  \end{columns}
+      \end{column}
+    \end{columns}
+  \end{exampleblock}
 \end{frame}
 
-
+\begin{frame}
+  \frametitle{Übung 6}
+  Als Datenbank nutzen wir PostgreSQL. Allerdings wollen wir dies gern von
+  \url{https://www.postgresql.org/download/linux/debian/} installieren. Welche
+  Schritte sind hierfür notwendig?
+  % Ich würde die folgenden Schritte gern mit den Leuten vor Ort durchsprechen
+  % und ungern das in eine Folie packen.
+  \begin{exampleblock}{PostgreSQL}
+    \begin{itemize}
+    \item postgresql
+    \item postgresql-client
+    \item postgresql-contrib
+    \item python-psycopg2
+    \item postgresql-client-common
+    \item postgresql-client
+    \end{itemize}
+  \end{exampleblock}
+\end{frame}
+    
 
 \end{document}
