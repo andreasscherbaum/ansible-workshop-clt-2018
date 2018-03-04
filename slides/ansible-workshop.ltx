@@ -513,6 +513,42 @@ tasks:
     \end{itemize}
   \end{exampleblock}
 \end{frame}
-    
 
+\subsection{Konfiguration}
+
+\begin{frame}[fragile]
+  \frametitle{Konfiguration}
+  Bisher installierten wir Dienste, starteten Dienste und sahen, wie neue Nutzer
+  eingerichtet werden können. Doch wie lässt sich mittels Ansible die
+  Konfiguration von Rechnern anpassen?\pause{}
+
+  Wir nutzen dafür das Modul \texttt{lineinfile}. Dieses stellt sicher, dass
+  eine bestimmte Zeile in einer Datei vorhanden bzw. nicht vorhanden ist.
+  \begin{exampleblock}{Bestimmten Nameserver entfernen}
+\begin{lstlisting}
+lineinfile:
+  dest: /etc/resolv.conf
+  regexp: '^nameserver'
+  line: 'nameserver 8.8.8.8'
+  state: absent
+\end{lstlisting}
+  \end{exampleblock}
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{Übung 7}
+  Wir stellen nun das installierte PHP sowie die Datenbank nach unseren Wünschen
+  ein:
+  \begin{itemize}
+  \item<+-> Wir aktivieren \texttt{short\_open\_tag}, deaktivieren
+    \texttt{allow\_url\_fopen}, setzen die \texttt{date.timezone} auf
+    Europe/Berlin und die \texttt{upload\_max\_filesize} auf \texttt{64M}.
+  \item<+-> In der \texttt{postgresql.conf} wird der Wert
+    \texttt{listen\_addresses} auf * gesetzt.
+  \item<+-> In der \texttt{pg\_hba.conf} wird die Zeile \texttt{host  test  test
+      0/0  md5} eingefügt.
+  \item<+-> Schließlich wird ein Nutzer \texttt{test} und eine Datenbank
+    \texttt{test} angelegt.
+  \end{itemize}
+\end{frame}
 \end{document}
