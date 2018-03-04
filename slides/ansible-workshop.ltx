@@ -336,10 +336,20 @@ verwaltet über Ansible
   \end{exampleblock}
 \end{frame}
 
-\begin{frame}
+\begin{frame}[fragile]
   \frametitle{Übung 4}
   Entwerft nun ein Playbook, welches den Hostnamen setzt, einen NTP"=Server
-  installiert und sicherstellt, dass der Daemon auch läuft.
+  installiert und sicherstellt, dass der Daemon auch läuft.\pause{}
+  \begin{alertblock}{Vorüberlegungen}
+    \begin{itemize}
+    \item<+-> Auf welchen Hosts soll die Aufgabe ausgeführt werden
+      (\texttt{hosts})?
+    \item<+-> Mit welchen Rechten wird die Aufgabe auf den Hosts aufgeführt
+      (\texttt{become}, \texttt{become\_user} etc.)?
+    \item<+-> In welchen Schritten kann die Aufgabe ausgeführt werden?
+    \item<+-> Welche Module werden benötigt? Welche Parameter sind sinnvoll?
+    \end{itemize}
+  \end{alertblock}
 \end{frame}
 
 \subsection{Rollen}
