@@ -6,13 +6,9 @@
   tasks:
 
     - name: Copy application
-      template:
-        src: "{{ playbook_dir }}/{{ item }}"
+      copy:
+        src: "{{ playbook_dir }}/phpinfo.php"
         dest: /var/www/html
-      with_items:
-        - phpinfo.php
-        - database.php
-        - index.php
 
     - debug:
-        msg: "Die URL lautet: http://{{ ansible_host }}/index.php"
+        msg: "Die URL lautet: http://{{ ansible_host }}/phpinfo.php"
