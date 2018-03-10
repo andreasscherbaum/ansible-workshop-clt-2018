@@ -631,4 +631,43 @@ handlers:
   Kopiert die Dateien in \texttt{../uebungen/08-simpleapp} auf den Server und
   lasst euch die IP"=Adresse ausgeben.
 \end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{Templates}
+  Neben dem Kopieren einfacher Dateien können wir auch Templates
+  anfertigen. Ansible baut daraus die korrekte Datei und lädt diese ins
+  Zielsystem. Die Basis für die Templates ist Jinja2.
+  \begin{exampleblock}{Aufruf mit Template-Modul}
+\begin{lstlisting}
+- name: Konfiguration
+  template: src=config.j2 dest=/etc/programm/tor.{{item.host}}.conf
+  with_items: {{ ipadressen }}
+\end{lstlisting}
+  \end{exampleblock}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Jinja2}
+  Die Template"=Sprache Jinja2 kommt aus dem Dunstkreis von Python und
+  funktioniert mit aktuellen Version (2.6.x, 2.7.x, ab 3.3.x) der Sprache.
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{Jinja2}
+  \framesubtitle{Variablen}
+  Im Unterordner \texttt{vars} können Variablen in die Datei \texttt{main.yml}
+  eingebaut werden. Auf diese greift die Template"=Datei zu und fügt die Werte
+  ein.
+  \begin{exampleblock}{}
+\begin{lstlisting}
+ipadressen:
+  - host: Bridge1
+    ip: 192.168.192.23
+    port: 12345
+  - host: Bridge2
+    ip: 192.168.192.42
+    port: 4521
+\end{lstlisting}
+  \end{exampleblock}
+\end{frame}
 \end{document}
