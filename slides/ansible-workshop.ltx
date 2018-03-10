@@ -551,4 +551,46 @@ lineinfile:
     \texttt{test} angelegt.
   \end{itemize}
 \end{frame}
+
+\subsection{Dateien kopieren}
+
+
+\begin{frame}[fragile]
+  \frametitle{Dateien kopieren}
+  Jetzt haben wir eine kleine Anwendung entwickelt. Diese soll auf den Server
+  kopiert werden.\pause{}
+
+  Dazu kann das
+  \href{http://docs.ansible.com/ansible/latest/copy_module.html}{\texttt{copy}-Modul}
+  verwendet werden. Ähnlich wie bei \texttt{cp}, muss mindestens Quelle und Ziel
+  der Operation angegeben werden.
+  \begin{exampleblock}{\texttt{index.html} auf den Webserver kopieren}
+\begin{lstlisting}
+- name: Nameserver-Einstellungen kopieren
+  copy:
+   src: resolv.conf
+   dest: /etc
+\end{lstlisting}
+  \end{exampleblock}
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{Das debug-Modul}
+  Das
+  \href{http://docs.ansible.com/ansible/latest/debug_module.html}{\texttt{debug}-Modul}
+  gibt Informationen bei der Ausführung von Playbooks aus.  Wir nutzen dies, um
+  über die Variable \texttt{ansible\_host} die IP"=Adresse des Hosts anzuzeigen.
+  \begin{exampleblock}{}
+\begin{lstlisting}
+- debug:
+  msg: "Die IP ist: {{ ansible_host }}."
+\end{lstlisting}
+  \end{exampleblock}
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{Übung 8}
+  Kopiert die Dateien in \texttt{../uebungen/08-simpleapp} auf den Server und
+  lasst euch die IP"=Adresse ausgeben.
+\end{frame}
 \end{document}
