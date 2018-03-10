@@ -543,6 +543,36 @@ lineinfile:
   \end{exampleblock}
 \end{frame}
 
+
+\begin{frame}
+  \frametitle{Handler}
+  Bei Änderungen auf einem Remote"=System müssen manchmal Aktionen ausgeführt
+  werden. Ein klassisches Beispiel sind Änderungen an der Konfiguration. Diese
+  sind verbunden mit einem Reload oder Neustart des betreffenden Dienstes.
+
+  Diese Aktionen sollen nicht bei jedem Aufruf eines Playbooks passieren,
+  sondern nur bei Bedarf.\pause{}
+  Ansible hat hierfür das Konzept der Handler eingebaut.
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{Handler}
+  Am Ende eines Plays werden die Aktionen unter \texttt{notify} aufgeführt und
+  die Liste an Aufgaben steht unter \texttt{handlers}:
+  \begin{exampleblock}{Apache neustarten}
+\begin{lstlisting}
+- name: Foo
+  ...
+  notify:
+    - restart apache
+...
+handlers:
+  - name: restart apache
+    service: name=apache state=restarted
+\end{lstlisting}
+  \end{exampleblock}
+\end{frame}
+
 \begin{frame}[fragile]
   \frametitle{Übung 7}
   Wir stellen nun das installierte PHP sowie die Datenbank nach unseren Wünschen
