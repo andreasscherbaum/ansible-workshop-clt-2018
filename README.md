@@ -35,3 +35,45 @@ https://chemnitzer.linux-tage.de/2018/en/programm/beitrag/145
   * Speichern der drei Dateien ansible.cfg, inventory und key.pem aus der Email mit den Zugangsdaten in das Verzeichnis ansible-workshop-clt-2018
   * Anpassen der Permissions für key.pem: chmod 0600 key.pem
   * Setzen der Umgebungsvariable ANSIBLE_CONFIG: export ANSIBLE_CONFIG=$(pwd)
+
+
+## Nach den Chemnitzer Linux-Tagen 2018
+
+Die Übungen in diesem Workshop kann man auch unabhängig vom CLT 2018 in Chemnitz nutzen. Allerdings muss man dafür seine eigene Umgebung mit zwei Servern (zum Beispiel virtuellen Maschinen) aufsetzen. Auf beiden Maschinen wird Debian oder Ubuntu vorausgesetzt, außerdem muss der verwendete Unix-User "sudo"-Rechte haben. Folgende Dateien werden benötigt:
+
+
+### ansible.cfg
+
+Diese Datei wird im ausgecheckten Hauptverzeichnis abgelegt. Beispielinhalt:
+
+```
+[defaults]
+inventory = $ANSIBLE_CONFIG/inventory
+private_key_file = $ANSIBLE_CONFIG/key.pem
+remote_user = ubuntu
+host_key_checking = False
+```
+
+Der _remote_user_ muss an den Nutzer angepasst werden, der sich später in die virtuellen Maschinen einloggen wird. Die Datei in _private_key_file_ wird verwendet um sich mit dem darin enthaltenen privaten Schlüssel auf den VMs anzumelden. Ist der Zugang bereits über ssh-keyless Login gewährleistet, kann diese Zeile entfernt werden.
+
+
+### inventory
+
+Diese Datei enthält Informationen über die virtuellen Maschinen. Diese Datei wird ebenfalls im ausgecheckten Verzeichnis abgelegt. Beispielinhalt:
+
+```
+[all]
+host1 ansible_host=<IP VM 1>
+host2 ansible_host=<IP VM 2>
+
+[dbservers]
+host1 ansible_host=<IP VM 1>
+
+[webservers]
+host2 ansible_host=<IP VM 2>
+```
+
+
+### key.pm
+
+Diese Datei enthält den privaten Schlüssel, um sich auf den VMs anzumelden.
