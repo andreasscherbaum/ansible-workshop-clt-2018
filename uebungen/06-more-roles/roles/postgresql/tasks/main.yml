@@ -21,6 +21,10 @@
     filename: postgresql-repository
 
 
+- name: Update apt cache
+  apt: update_cache=yes
+
+
 - name: Install PostgreSQL packages
   package:
     name: "{{ item }}"
