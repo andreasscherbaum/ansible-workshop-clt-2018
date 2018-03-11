@@ -24,7 +24,7 @@ https://chemnitzer.linux-tage.de/2018/en/programm/beitrag/145
 ## Voraussetzungen
 
   * Laptop mit gängiger, aktueller Linux-Distribution (z.B. Ubuntu >= 16.04, Debian >= stretch)
-  * Installiertes ansible >= 2.x
+  * Installiertes ansible >= 2.1
   * git
   * ssh client
 

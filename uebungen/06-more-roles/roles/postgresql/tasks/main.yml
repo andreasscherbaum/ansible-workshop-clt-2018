@@ -18,6 +18,7 @@
     repo: "deb {{ postgresql_repository_apt }} {{ lsb_release.stdout }}-pgdg main"
     state: present
     update_cache: yes
+    # the "filename" requires Ansible 2.1 or later
     filename: postgresql-repository
 
 
