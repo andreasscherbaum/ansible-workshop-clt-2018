@@ -27,6 +27,15 @@
   \maketitle{}
 \end{frame}
 
+
+
+
+\begin{frame}[plain,noframenumbering]
+  \frametitle{Agenda}
+  \tableofcontents
+\end{frame}
+
+
 \section{Einleitung}
 
 \begin{frame}
@@ -51,6 +60,15 @@ verwaltet über Ansible
   \item Andreas Scherbaum
   \end{itemize}
 \end{frame}
+
+
+\AtBeginSection{
+    \begin{frame}[plain,noframenumbering]
+        \frametitle{Agenda}
+        \tableofcontents[currentsection]
+    \end{frame}
+}
+
 
 \section{Einführung in Ansible}
 
@@ -82,7 +100,7 @@ verwaltet über Ansible
   \frametitle{Was ist Ansible?}
   \framesubtitle{Details}
   \begin{itemize}
-  \item<+-> Werkzeug zur Automatisierung von Administrationsaufgaben
+  \item<+-> leichtgewichtiges Werkzeug zur Automatisierung von Administrationsaufgaben
   \item<+-> Freie Software
   \item<+-> in Python entwickelt
   \end{itemize}
@@ -161,7 +179,7 @@ verwaltet über Ansible
   \frametitle{Inventory}
   \framesubtitle{Format}
   Das Inventory kann im INI"=Format vorliegen \only<3>{oder als YAML"=Datei:}
-  \only<2>{  \begin{exampleblock}{hosts}
+  \only<2>{  \begin{exampleblock}{hosts als INI}
     \texttt{192.168.23.42}\\
     \texttt{clt.18.example.org}
 
@@ -169,6 +187,20 @@ verwaltet über Ansible
     \texttt{192.168.17.189}\\
     \texttt{clt.18.example.org}
   \end{exampleblock}}
+
+\begin{onlyenv}<3>
+  \begin{exampleblock}{hosts als YAML}
+\begin{lstlisting}
+all:
+  hosts:
+    192.168.23.42
+    clt.18.example.org
+  children:
+    web:
+      clt.18.example.org:
+\end{lstlisting}
+  \end{exampleblock}
+\end{onlyenv}
 \end{frame}
 
 \begin{frame}[fragile]
@@ -321,7 +353,7 @@ verwaltet über Ansible
 - hosts: all
   tasks:
   - name: Shell installieren
-    apt: name=fish state=installed
+    apt: name=fish
   - name: Nutzer anlegen
     user: name=clt18 state=present shell=/usr/bin/fish
 \end{lstlisting}
@@ -390,13 +422,12 @@ verwaltet über Ansible
     \end{column}
     \begin{column}{.4\textwidth}
       \tikzstyle{every node}=[draw=black,thick,anchor=west]
-      \tikzstyle{selected}=[draw=red,fill=red!30]
-      \tikzstyle{optional}=[dashed,fill=gray!50]
+      \tikzstyle{selected}=[draw=green,fill=green!30]
       \begin{tikzpicture}[%
         grow via three points={one child at (0.5,-0.7) and two children at
           (0.5,-0.7) and (0.5,-1.4)}, edge from parent
         path={(\tikzparentnode.south) |- (\tikzchildnode.west)}]
-        \node {/} child { node {roles} child { node {Rolle}
+        \node {/} child { node {roles} child { node [selected] {Rolle}
             child { node {tasks}} child { node {handlers}} child { node {files}}
             child { node {templates}} child { node {vars}} child { node
               {defaults}} child { node {meta}} }} ;
@@ -569,6 +600,38 @@ lineinfile:
 handlers:
   - name: restart apache
     service: name=apache state=restarted
+\end{lstlisting}
+  \end{exampleblock}
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{Lookups}
+  Mittels Lookups können wir innerhalb von Ansible auf andere Quellen
+  zugreifen. Das heißt, im Dateisystem lesen wie auch externe Dienste
+  kontaktieren.\pause{}
+
+  \begin{exampleblock}{}
+\begin{lstlisting}
+- hosts: all
+  vars:
+     contents: "{{ lookup('file', '/etc/debian_version') }}"
+  tasks:
+     - debug: msg="Die Debian-Version ist {{ contents }}"
+\end{lstlisting}
+  \end{exampleblock}
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{Lookups}
+  \framesubtitle{Passwort erzeugen}
+  Mittels \texttt{password} können wir ein Passwort erzeugen und dies in eine
+  Datei schreiben. Sollte die Datei bereits existieren, wird der Inhalt
+  ausgelesen. Standardmäßig erzeugt Ansible einen Mix aus Buchstaben, Zahlen und
+  Sonderzeichen mit 20~Zeichen.
+  \begin{exampleblock}{}
+\begin{lstlisting}
+password: "{{ lookup('password', 'PIN chars=digits length=4) }}"
+password: "{{ lookup('password', '/home/user/.geheim/passwort chars=ascii_letters,digits,hexdigits,punctuation') }}"
 \end{lstlisting}
   \end{exampleblock}
 \end{frame}
