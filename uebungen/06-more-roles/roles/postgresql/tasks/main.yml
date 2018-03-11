@@ -17,7 +17,7 @@
   apt_repository:
     repo: "deb {{ postgresql_repository_apt }} {{ lsb_release.stdout }}-pgdg main"
     state: present
-    update_cache: no
+    update_cache: yes
     filename: postgresql-repository
 
 
