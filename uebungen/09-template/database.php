@@ -8,7 +8,7 @@
 <body>
     <h1>Datenbank Beispiel</h1>
     <p>
-<?php
+<?
 
 # connect to database
 $conn = pg_connect("host={{ hostvars['host1'].ansible_host }} dbname='test' user='test' password='{{ lookup('password', '../../db-account-test.txt chars=ascii_letters,digits length=12') }}'");
