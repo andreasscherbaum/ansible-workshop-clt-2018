@@ -14,7 +14,11 @@ Dieses Repository enthält die Slides und Übungen für einen [Ansible](https://
 
 ## Anmeldung
 
-https://chemnitzer.linux-tage.de/2018/en/programm/beitrag/145
+[Chemnitzer Linux-Tage 2018](https://chemnitzer.linux-tage.de/2018/en/programm/beitrag/145)
+
+## Slides
+
+[Slides: Server mit Ansible verwalten](https://github.com/andreasscherbaum/ansible-workshop-clt-2018/blob/master/slides/ansible-workshop.pdf)
 
 ## Vorkenntnisse
 
